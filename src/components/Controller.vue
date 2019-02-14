@@ -24,12 +24,12 @@
         &bull;
         {{ composition.scale.root.replace('#', '♯') }} <small>{{ composition.scale.scale.name.toUpperCase() }}</small>
       </h2>
-      <div class="counter-wrapper" v-if="playing">
+      <!-- <div class="counter-wrapper" v-if="playing">
         <span class="counter" :class="{ number: typeof beat === 'number' }">
           <span v-if="beat" v-text="beat"></span>
           <span v-else>&nbsp;</span>
         </span>
-      </div>
+      </div> -->
       <Animation class="animation" :color="colorLight" :waveforms="waveforms" />
     </div>
     <div class="footer">
@@ -121,7 +121,7 @@ export default {
       this.updateAbc();
     },
     setCompositionId(epoch) {
-      this.compositionId = Composer.validEpoch(epoch);
+      this.compositionId = DateFormatter.validEpoch(epoch);
       this.generateComposition(this.compositionId);
     },
     start() {
@@ -140,7 +140,7 @@ export default {
       else this.stop();
     },
     travel(epoch) {
-      if (epoch === undefined) epoch = Composer.randomEpoch();
+      if (epoch === undefined) epoch = DateFormatter.randomEpoch();
       this.setCompositionId(epoch);
     },
     updateAbc() {
@@ -193,7 +193,8 @@ export default {
   },
   beforeDestroy() {
     if (this.performer) this.performer.stop();
-    window.removeEventListener("keydown", this._keydown);
+    if (this.listenerKeyDown)
+      window.removeEventListener("keydown", this.listenerKeyDown);
   },
   watch: {
     "$route.params.epoch"(epoch) {
@@ -205,7 +206,8 @@ export default {
   created() {
     this.updateFavicon(false);
     this.setCompositionId(this.$route.params.epoch);
-    window.addEventListener("keydown", this._keydown.bind(this));
+    this.listenerKeyDown = this._keydown.bind(this);
+    window.addEventListener("keydown", this.listenerKeyDown);
   }
 };
 </script>

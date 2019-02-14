@@ -43,33 +43,31 @@ $button-solid-bg: white;
 $button-solid-bg-focus: white;
 $button-solid-border-dark: white;
 
-button {
+button,
+input,
+select {
   appearance: none;
   user-select: none;
   border: none;
   font-family: $font-family;
   font-weight: $font-weight-normal;
   font-size: 16px;
-  display: inline-block;
   padding: 0.5rem 1rem;
-  margin: 2px 1px;
+  &.small {
+    font-size: 12px;
+    padding: 0.25rem 0.5rem;
+  }
+  &.large {
+    font-size: 24px;
+    padding: 0.5rem 1.5rem;
+  }
+  display: inline-block;
   border-radius: $radius;
-  cursor: pointer;
   vertical-align: middle;
   outline: none;
   color: $button-color;
   background: $button-bg;
   border: $border solid $button-border-dark;
-  &:hover:not(:disabled) {
-    transform: translateY(1px);
-  }
-  &:focus:not(:disabled) {
-    text-decoration: underline;
-  }
-  &:active:not(:disabled) {
-    transform: translateY(1px);
-    border: $border solid $button-border-dark;
-  }
   &:disabled {
     cursor: not-allowed;
     color: var(--color-light);
@@ -81,18 +79,33 @@ button {
     margin-right: 0;
     width: 100%;
   }
-  @keyframes animate {
-    from {
-      transform: translateZ(0) scale(1);
+  &.text {
+    color: $button-solid-bg;
+    background: transparent;
+    border-radius: 0;
+    border: $border solid transparent;
+    border-bottom-color: $button-solid-border-dark;
+    font-weight: $font-weight-normal;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    &.small {
+      padding-left: 0.25rem;
+      padding-right: 0.25rem;
     }
-    to {
-      transform: translateZ(0) scale(1.05);
+    &.large {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    &:disabled {
+      color: $button-solid-color;
+      border-color: var(--color-light);
+      background: var(--color-light);
+    }
+    &:focus:not(:disabled) {
+      border-radius: $radius;
+      border: $border solid $button-solid-border-dark;
     }
   }
-  &.animate {
-    animation: animate 500ms ease-in-out alternate infinite;
-  }
-
   &.solid {
     color: $button-solid-color;
     background: $button-solid-bg;
@@ -107,28 +120,43 @@ button {
     }
   }
 }
-
-.button-list {
-  width: auto;
-  display: inline-block;
+button {
   margin: 2px 1px;
-  border-radius: $radius;
-  overflow: hidden;
-  vertical-align: middle;
-  border: $border solid $button-border-dark;
-  button {
-    box-shadow: none !important;
-    margin: 0 !important;
-    border-radius: 0 !important;
-    border: none !important;
-    transform: none !important;
-    + button {
-      border-left: $border solid $button-border-dark !important;
+  cursor: pointer;
+  &:focus:not(:disabled) {
+    text-decoration: underline;
+  }
+  &:hover:not(:disabled) {
+    transform: translateY(1px);
+  }
+  &:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+  @keyframes animate {
+    from {
+      transform: translateZ(0) scale(1);
+    }
+    to {
+      transform: translateZ(0) scale(1.05);
     }
   }
-  .option {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+  &.animate {
+    animation: animate 500ms ease-in-out alternate infinite;
+  }
+}
+
+.datetime-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  margin: -0.25rem;
+  select,
+  input,
+  button {
+    width: auto;
+    text-align: center;
+    margin: 0.25rem;
   }
 }
 

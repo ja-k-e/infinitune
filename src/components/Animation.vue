@@ -21,7 +21,7 @@ export default {
       const count = this.waveforms.length;
       const formWidth = this.width / count;
       let x = 0;
-      this.ctx.strokeStyle = this.color;
+      this.ctx.strokeStyle = "white" || this.color;
       this.ctx.lineWidth = 4;
       this.ctx.beginPath();
       this.waveforms.forEach((waveform, i) => {
