@@ -35,7 +35,9 @@
     <div class="footer">
       <a href="https://twitter.com/jake_albaugh" target="blank">@jake_albaugh</a>
       &bull;
-      <a href="https://github.com/jakealbaugh/infinitune" target="blank">@jake_albaugh</a>
+      <a href="https://github.com/jakealbaugh/infinitune" target="blank">GitHub</a>
+      <br>
+      Having issues? Try desktop Chrome or Firefox
     </div>
   </main>
 </template>
@@ -224,8 +226,8 @@ main {
 }
 .abc {
   margin-bottom: -1rem;
-  @media (min-width: 900px) {
-    margin-bottom: -2.5rem;
+  @media (min-width: 1024px) {
+    margin-bottom: -2rem;
   }
 }
 .animations {
@@ -237,5 +239,6 @@ main {
 .footer {
   font-size: 0.7rem;
   text-align: center;
+  line-height: 1.4;
 }
 </style>

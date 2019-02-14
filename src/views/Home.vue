@@ -161,6 +161,15 @@ h1 {
     }
   }
 }
+h2 {
+  font-size: 1rem;
+  @media (min-width: 700px) {
+    font-size: 1.4rem;
+  }
+  @media (min-width: 1024px) {
+    font-size: 1.8rem;
+  }
+}
 .container {
   margin: 0 auto;
   width: 95%;
