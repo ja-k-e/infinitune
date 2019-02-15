@@ -32,8 +32,8 @@
         <option value="11">November</option>
         <option value="12">December</option>
       </select>
-      <masked-input class="text" :class="{ small: mobile, large: !mobile }" size="2" v-model="rawDay" :mask="monthMask" placeholder="dd" />
-      <input class="text" :class="{ small: mobile, large: !mobile }" size="6" v-model="rawYear" placeholder="YYYY" type="number" min="0" max="275760" />
+      <masked-input class="text" type="tel" :class="{ small: mobile, large: !mobile }" size="2" v-model="rawDay" :mask="dayMask" placeholder="dd" />
+      <input class="text" type="tel" :class="{ small: mobile, large: !mobile }" size="6" v-model="rawYear" placeholder="YYYY" />
       <select class="text" :class="{ small: mobile, large: !mobile }" v-model="rawAdbc">
         <option value="A.D.">A.D.</option>
         <option value="B.C.">B.C.</option>
@@ -69,7 +69,7 @@ export default {
     return {
       customForm: false,
       mobile: true,
-      monthMask: {
+      dayMask: {
         pattern: "X1",
         formatCharacters: {
           X: { validate: c => /[0123]/.test(c) }

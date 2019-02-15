@@ -47,7 +47,6 @@ button,
 input,
 select {
   appearance: none;
-  user-select: none;
   border: none;
   font-family: $font-family;
   font-weight: $font-weight-normal;
@@ -123,6 +122,7 @@ select {
 button {
   margin: 2px 1px;
   cursor: pointer;
+  user-select: none;
   &:focus:not(:disabled) {
     text-decoration: underline;
   }
