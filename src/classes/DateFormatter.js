@@ -1,7 +1,7 @@
 export default class DateFormatter {
   constructor(epoch) {
     this.date = new Date(parseInt(epoch));
-    const [month, day, year] = this.date.toLocaleDateString().split("/");
+    const [month, day, year] = [this.date.getMonth() + 1, this.date.getDate(), this.date.getFullYear()]
     this.month = month;
     this.day = day;
     this.formattedYear = year;
