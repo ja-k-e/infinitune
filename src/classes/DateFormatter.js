@@ -1,9 +1,9 @@
 export default class DateFormatter {
   constructor(epoch) {
     this.date = new Date(parseInt(epoch));
-    const [month, day, year] = [this.date.getMonth() + 1, this.date.getDate(), this.date.getFullYear()]
-    this.month = month;
-    this.day = day;
+    this.month = this.date.getMonth() + 1;
+    this.day = this.date.getDate();
+    const year = this.date.getFullYear();
     this.formattedYear = year;
     this.year = year;
     this.adbc = epoch < 0 ? "B.C." : "A.D.";
