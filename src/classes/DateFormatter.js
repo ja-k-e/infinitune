@@ -9,7 +9,9 @@ export default class DateFormatter {
     this.adbc = epoch < 0 ? "B.C." : "A.D.";
     // delimit if high number.
     if (year.toString().length > 4)
-      this.formattedYear = year.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      this.formattedYear = year
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     this.formattedYear += ` ${this.adbc}`;
     const [time, ampm] = this.date.toLocaleTimeString().split(" ");
     const [hours, minutes, seconds] = time.split(":");

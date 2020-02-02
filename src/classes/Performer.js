@@ -51,23 +51,23 @@ export default class Performer {
   setupDrumPart() {
     const notes = [
       { time: "0:0:0", note: "C2", length: "8n", beat: 1 },
-      { time: "0:0:2", note: "E3", length: "8n", beat: "and" },
+      { time: "0:0:2", note: "D3", length: "8n", beat: "and" },
       { time: "0:1:0", note: "C3", length: "8n", beat: 2 },
-      { time: "0:1:2", note: "E3", length: "8n", beat: "and" },
+      { time: "0:1:2", note: "D3", length: "8n", beat: "and" },
       { time: "0:2:0", note: "C2", length: "8n", beat: 3 },
-      { time: "0:2:2", note: "E3", length: "8n", beat: "and" },
-      { time: "0:2:3", note: "E3", length: "8n", beat: "uh" },
+      { time: "0:2:2", note: "D3", length: "8n", beat: "and" },
+      { time: "0:2:3", note: "D3", length: "8n", beat: "uh" },
       { time: "0:3:0", note: "C3", length: "8n", beat: 4 },
-      { time: "0:3:2", note: "E3", length: "8n", beat: "and" },
+      { time: "0:3:2", note: "D3", length: "8n", beat: "and" },
       { time: "0:4:0", note: "C2", length: "8n", beat: 5 },
-      { time: "0:4:2", note: "E3", length: "8n", beat: "and" },
+      { time: "0:4:2", note: "D3", length: "8n", beat: "and" },
       { time: "0:5:0", note: "C3", length: "8n", beat: 6 },
-      { time: "0:5:2", note: "E3", length: "8n", beat: "and" },
-      { time: "0:5:3", note: "E3", length: "8n", beat: "uh" },
+      { time: "0:5:2", note: "D3", length: "8n", beat: "and" },
+      { time: "0:5:3", note: "D3", length: "8n", beat: "uh" },
       { time: "0:6:0", note: "C2", length: "8n", beat: 7 },
-      { time: "0:6:2", note: "E3", length: "8n", beat: "and" },
+      { time: "0:6:2", note: "D3", length: "8n", beat: "and" },
       { time: "0:7:0", note: "C3", length: "8n", beat: 8 },
-      { time: "0:7:2", note: "E3", length: "8n", beat: "and" }
+      { time: "0:7:2", note: "D3", length: "8n", beat: "and" }
     ];
     this.parts.drum = new Part((time, val) => {
       if (this.beatCallback && val.beat) this.beatCallback(val.beat);
@@ -85,7 +85,11 @@ export default class Performer {
       Draw.schedule(() => {
         if (this.noteCallback) this.noteCallback(type, val);
       });
-      this.synths[type].attack(val.note, val.length, time, val.velocity);
+      const notes = val.note.map(note => {
+        const oct = note.match(/\d/);
+        return note.replace(oct, parseInt(oct) - 1);
+      });
+      this.synths[type].attack(notes, val.length, time, val.velocity);
     }, notes);
     this.parts[type].loop = Infinity;
     this.parts[type].loopEnd = loopEnd;

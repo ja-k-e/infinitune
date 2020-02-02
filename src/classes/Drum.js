@@ -1,4 +1,4 @@
-import { Sampler, Gain } from "tone";
+import { Sampler, Filter, Gain } from "tone";
 
 export default class Drum {
   constructor(waveform) {
@@ -11,9 +11,11 @@ export default class Drum {
       },
       () => (this.ready = true)
     );
-    this.gain = new Gain(0.5);
+    this.gain = new Gain(0.8);
     this.gain.toMaster();
-    this.synth.connect(this.gain);
+    const filter = new Filter(1700, "lowpass");
+    filter.connect(this.gain);
+    this.synth.connect(filter);
     this.synth.connect(waveform);
   }
 }

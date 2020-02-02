@@ -15,21 +15,15 @@ export default class Synth {
     this.type = type;
     this.voices = voices;
     this.pan = new Panner(pan);
-    this.gain = new Gain(0.6);
+    this.gain = new Gain(type === "bass" ? 0.3 : 0.1);
     this.gain.toMaster();
     this.pan.connect(this.gain);
     this.initializeSynth(waveform);
   }
 
   attack(note, length, time, velocity) {
-    if (this.voices === 1) {
-      if (velocity !== 0) {
-        note = note[0];
-        this.synth.triggerAttackRelease(note, length, time, velocity);
-      }
-    } else {
-      this.release(time);
-      if (velocity !== 0) this.synth.triggerAttack(note, time, velocity);
+    if (velocity !== 0) {
+      this.synth.triggerAttackRelease(note, length, time, velocity);
     }
   }
 
@@ -39,17 +33,13 @@ export default class Synth {
   }
 
   initializeSynth(waveform) {
-    const bass = this.type === "bass";
-    const mono = this.voices === 1;
-    const klass = bass ? Tone.Synth : Tone.Synth;
-    // const settings = bass ? this.settingsSynth[3] : this.settingsSynth[6];
-    const settings = bass ? this.settingsSynth[6] : this.settingsSynth[6];
-    const gain = 0.4;
-    this.synth = mono ? new klass() : new Tone.PolySynth(this.voices, klass);
-    this.synth.set(settings);
+    this.synth = new Tone.PolySynth(this.voices, Tone.Synth);
+    this.synth.set({
+      oscillator: { type: "sawtooth4" },
+      envelope: { attack: 0.01 }
+    });
     this.synth.connect(this.pan);
     this.synth.connect(waveform);
-    this.gain.gain.value = gain;
   }
 
   get settingsSynth() {
@@ -120,8 +110,13 @@ export default class Synth {
       },
       {
         portamento: 0,
-        oscillator: { type: "sine" },
-        envelope: { attack: 0.001, decay: 0.1, sustain: 0.1, release: 1.2 }
+        oscillator: { type: "triangle" },
+        envelope: { attack: 0.1 }
+      },
+      {
+        portamento: 0,
+        oscillator: { type: "triangle8" },
+        envelope: { attack: 0.1 }
       }
     ];
   }
