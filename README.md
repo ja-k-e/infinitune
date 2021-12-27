@@ -2,7 +2,7 @@
 
 Turning epochs into unique procedurally-generated musical compositions.
 
-[infinitune.app](https://infinitune.app)
+[infinitune.jake.fun](https://infinitune.jake.fun)
 
 # Infinitune: Development
 
