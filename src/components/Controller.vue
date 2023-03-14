@@ -33,9 +33,9 @@
       <Animation class="animation" :color="colorLight" :waveforms="waveforms" />
     </div>
     <div class="footer">
-      <a href="https://twitter.com/jake_albaugh" target="blank">@jake_albaugh</a>
+      <a href="https://www.jake.fun" target="blank">jake.fun</a>
       &bull;
-      <a href="https://github.com/jakealbaugh/infinitune" target="blank">GitHub</a>
+      <a href="https://github.com/ja-k-e/infinitune" target="blank">GitHub</a>
       <br>
       Having issues? Try desktop Chrome or Firefox
     </div>
